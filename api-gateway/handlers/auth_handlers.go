@@ -11,12 +11,13 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 var userService us.UserServiceClient
 
 func init() {
-	conn, err := grpc.Dial(config.GetConfig().UserServiceAddress, grpc.WithInsecure())
+	conn, err := grpc.NewClient(config.GetConfig().UserServiceAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("Failed to connect to user service: %v", err)
 	}

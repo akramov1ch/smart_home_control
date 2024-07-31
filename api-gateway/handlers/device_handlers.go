@@ -2,19 +2,20 @@ package handlers
 
 import (
 	"api-gateway/config"
-    dv "api-gateway/proto/device"
+	dv "api-gateway/proto/device"
 	"context"
 	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 var deviceService dv.DeviceServiceClient
 
 func init() {
-	conn, err := grpc.Dial(config.GetConfig().DeviceServiceAddress, grpc.WithInsecure())
+	conn, err := grpc.NewClient(config.GetConfig().DeviceServiceAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("Failed to connect to device service: %v", err)
 	}
