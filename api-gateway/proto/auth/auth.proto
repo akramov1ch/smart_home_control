@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option go_package = "./proto";
+
+// Register request message
+message RegisterRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+// Register response message
+message RegisterResponse {
+  string user_id = 1;
+  string message = 2;
+}
+
+// Login request message
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+// Login response message
+message LoginResponse {
+  string user_id = 1;
+  string message = 2;
+}
+
+// Auth service definition
+service AuthService {
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+  rpc Login (LoginRequest) returns (LoginResponse);
+}

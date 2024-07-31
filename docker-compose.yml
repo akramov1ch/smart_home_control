@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - user-service
+      - device-service
+    environment:
+      - JWT_SECRET=your_jwt_secret
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "50051:50051"
+    environment:
+      - POSTGRES_USER=yourusername
+      - POSTGRES_PASSWORD=yourpassword
+      - POSTGRES_DB=userdb
+    depends_on:
+      - postgres
+
+  device-service:
+    build: ./device-service
+    ports:
+      - "50052:50052"
+    environment:
+      - REDIS_ADDR=redis:6379
+    depends_on:
+      - redis
+
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=yourusername
+      - POSTGRES_PASSWORD=yourpassword
+      - POSTGRES_DB=userdb
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:6
+    ports:
+      - "6379:6379"

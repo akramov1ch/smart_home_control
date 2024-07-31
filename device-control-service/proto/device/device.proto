@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "/proto/device";
+
+service DeviceService {
+    rpc AddDevice (AddDeviceRequest) returns (AddDeviceResponse);
+    rpc GetDevices (GetDevicesRequest) returns (GetDevicesResponse);
+    rpc GetDevice (GetDeviceRequest) returns (GetDeviceResponse);
+    rpc UpdateDevice (UpdateDeviceRequest) returns (UpdateDeviceResponse);
+    rpc DeleteDevice (DeleteDeviceRequest) returns (Empty);
+}
+
+message AddDeviceRequest {
+    string name = 1;
+    string type = 2;
+}
+
+message AddDeviceResponse {
+    string id = 1;
+    string name = 2;
+    string type = 3;
+}
+
+message GetDevicesRequest {}
+
+message GetDevicesResponse {
+    repeated Device devices = 1;
+}
+
+message GetDeviceRequest {
+    string id = 1;
+}
+
+message GetDeviceResponse {
+    string id = 1;
+    string name = 2;
+    string type = 3;
+}
+
+message UpdateDeviceRequest {
+    string id = 1;
+    string name = 2;
+    string type = 3;
+}
+
+message UpdateDeviceResponse {
+    string id = 1;
+    string name = 2;
+    string type = 3;
+}
+
+message DeleteDeviceRequest {
+    string id = 1;
+}
+
+message Device {
+    string id = 1;
+    string name = 2;
+    string type = 3;
+}
+
+message Empty {}

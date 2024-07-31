@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "/proto";
+
+service ControllerService {
+    rpc ControlDevice (ControlDeviceRequest) returns (ControlDeviceResponse);
+}
+
+message ControlDeviceRequest {
+    string device_id = 1;
+    string action = 2;
+}
+
+message ControlDeviceResponse {
+    string result = 1;
+}
