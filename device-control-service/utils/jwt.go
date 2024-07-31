@@ -3,10 +3,10 @@ package utils
 import (
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
+	jwt "github.com/dgrijalva/jwt-go"
 )
 
-var jwtKey = []byte("my_secret_key")
+var jwtKey = []byte("shaxbozakramovic")
 
 type Claims struct {
 	Username string `json:"username"`
